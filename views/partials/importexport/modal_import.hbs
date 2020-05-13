@@ -1,0 +1,79 @@
+<div class="editor_modal_box">
+  <header>
+      <h1 class="script-info">Import Scripts</h1>
+  </header>
+  <section class="container">
+    <form class="subcontainer" name="import_commands" ng-submit="import_unparsed()" ng-if="!commands_for_import.length">
+        <h3 class="import-json">Import JSON</h3>
+        <textarea rows='10' ng-model="ui.un_parsed_commands" required></textarea>
+        <button type="submit" style="margin-top: 10px; background-color: #008a47; border-radius: 16.5px; height: 33px; font-size: 14px; color: #101A2C;">Import JSON</button>
+    </form>
+    <div ng-if="commands_for_import.length">
+      <table class="sheet importable_scripts">
+        <tr>
+          <th>Import</th>
+          <th>Script Name</th>
+          <th>Description</th>
+        </tr>
+        <tr ng-repeat="c in commands_for_import" class="ng-class:{exists: c.already_exist && !c.exclude_from_import};">
+          <td ng-click="add_to_import(c)"><input type="checkbox" ng-checked="!c.exclude_from_import" ></input</td>
+          <td>{% c.command %}</td>
+          <td>{% c.description %}</td>
+        </tr>
+    </table>
+  </section>
+  <footer>
+    <form name="finalize_import" ng-submit="makeImportApi()">
+      <button style="background: #FCBF10 100%; border-radius: 16.5px; height: 33px; width: 85px; font-size: 14px; color: #101A2C; margin: 10px 0 10px;" type="submit" ng-disabled="!commands_for_import.length" >{% ui.import_button_text %}</button>
+      <button class="cancel-button" type="button" ng-click="ui.import_mode=false;">Cancel</button>
+    </form>
+  </footer>
+</div>
+
+<style>
+  .script-info {
+    font-size: 26px;
+    color: #FCBF10;
+    letter-spacing: 0;
+  }
+
+  .label-field {
+    font-size: 14px;
+    color: #fff;
+    margin-bottom: 4px;
+  }
+
+  .done-button {
+    background: #FCBF10 100%;
+    border-radius: 16.5px;
+    height: 33px;
+    width: 85px;
+    font-size: 14px;
+    color: #101A2C;
+    margin: 10px 0 10px;
+  }
+
+  .done-button:hover {
+    color: #101A2C;
+  }
+
+  .cancel-button {
+    background: #497AD2;
+    border-radius: 16.5px;
+    height: 33px;
+    width: 85px;
+    font-size: 14px;
+    color: #101A2C;
+    margin: 10px 0 10px;
+  }
+
+  .cancel-button:hover {
+    color: #101A2C;
+  }
+
+  .import-json {
+    color: #fff;
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+</style>

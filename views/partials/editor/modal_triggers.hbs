@@ -1,0 +1,91 @@
+<div class="editor_modal_box" ng-if="ui.triggers">
+  <header>
+    <h1 style="font-size: 26px; color:#FCBF10; margin-bottom: 15px">Add Trigger</h1>
+
+    <form name="formHolder.add_trigger" ng-submit="addTrigger()">
+
+        <p>
+          <label style="font-size: 14px;">Trigger Type :</label>
+          <select ng-model="trigger.type" style="margin-bottom: 4px; font-size: 14px; color: #9EA7AC; padding: 12px; background: #151C28; border-radius: 8px; border: none;">
+            <option value="string">Exact String Match</option>
+            <option value="regexp">Regular Expression</option>
+            <option value="intent" ng-if="ui.intents && ui.intents.length">Intent from LUIS.ai</option>
+          </select>
+        </p>
+
+        <p ng-if="trigger.type=='intent'">
+            <label>Intent</label>
+            <select ng-model="trigger.pattern" ng-options="intent.name as intent.name for intent in ui.intents track by intent.name">
+            </select>
+        </p>
+
+        <p ng-if="trigger.type!='intent'">
+            <label style="font-size: 14px;">Pattern :</label>
+            <input type="text" ng-model="trigger.pattern" required placeholder="New Trigger" style="margin-bottom: 4px; font-size: 14px; color: #9EA7AC; padding: 12px; background: #151C28; border-radius: 8px; border: none;" />
+        </p>
+
+        <button type="submit" ng-disabled="!trigger.pattern" class="new-primary">Add</button>
+    </form>
+  </header>
+  <section>
+  <table class="sheet">
+    <tr>
+      <th></th>
+      <th>
+        Trigger Type
+      </th>
+      <th>
+        Pattern
+      </th>
+    </tr>
+    <tr ng-repeat="trigger in command.triggers">
+      <td width="22">
+        <button class="delete" ng-click="removeTrigger($index)"></button>
+      </td>
+      <td width="50">
+        {% trigger.type %}
+      </td>
+      <td>
+        {% trigger.pattern %}
+      </td>
+    </tr>
+  </table>
+</section>
+<footer>
+  <button class="done-button" ng-click="closeTriggers()">Done</button>
+</footer>
+</div>
+
+<style>
+  .new-primary {
+    color: #98A4B2;
+    background: #343C4F;
+  }
+
+  table tr th {
+    background-color: #182234;
+    border: 1px solid #2C394F;
+    color: #fff;
+    font-size: 14px;
+  }
+
+  table tr td {
+    background-color: #182234;
+    border: 1px solid #2C394F;
+    color: #fff;
+  }
+
+  .done-button {
+    background: #FCBF10;
+    border-radius: 16.5px;
+    height: 33px;
+    width: 85px;
+    font-size: 14px;
+    color: #101A2C;
+    margin: 10px 0 10px;
+  }
+
+  .done-button:hover {
+    color: #101A2C;
+  }
+</style>

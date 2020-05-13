@@ -1,0 +1,82 @@
+<div class="editor_modal_box">
+    <header>
+      <h3 class="script-info">Script Export</h3>
+      <p>Download exported scripts, or copy the JSON below into your own file.</p>
+    </header>
+    <section class="box">
+      <textarea rows='10' id="export" readonly>{% parsed_commands | json %}</textarea>
+    </section>
+    <footer>
+      <button class="download-button" ng-href="{% ui.exported_text %}" download="scripts.json">Download</button>
+      <button class="cancel-button" ngclipboard data-clipboard-target="#export" ngclipboard-success="clipped(e);" ngclipboard-error="clipError(e);">
+        {{!-- <i class="fa fa fa-clipboard"></i>  --}}
+        {% ui.copy %}
+        </button>
+      <button class="done-button" ng-click="clearExport()">Done</button>
+    </footer>
+</div>
+
+<style>
+  .script-info {
+    font-size: 26px;
+    color: #FCBF10;
+    letter-spacing: 0;
+  }
+
+  p {
+    font-size: 18px;
+    margin-top: 18px;
+  }
+
+  .label-field {
+    font-size: 14px;
+    color: #fff;
+    margin-bottom: 4px;
+  }
+
+  .download-button {
+    background: #008a47;
+    border-radius: 16.5px;
+    height: 33px;
+    font-size: 14px;
+    color: #101A2C;
+    margin: 10px 0 10px;
+  }
+
+  .download-button:hover {
+    color: #101A2C;
+  }
+
+  .done-button {
+    background: #FCBF10;
+    border-radius: 16.5px;
+    height: 33px;
+    width: 85px;
+    font-size: 14px;
+    color: #101A2C;
+    margin: 10px 0 10px;
+  }
+
+  .done-button:hover {
+    color: #101A2C;
+  }
+
+  .cancel-button {
+    background: #497AD2;
+    border-radius: 16.5px;
+    height: 33px;
+    width: 85px;
+    font-size: 14px;
+    color: #101A2C;
+    margin: 10px 0 10px;
+  }
+
+  .cancel-button:hover {
+    color: #101A2C;
+  }
+
+  .import-json {
+    color: #fff;
+    font-size: 18px;
+  }
+</style>

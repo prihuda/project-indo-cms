@@ -1,0 +1,81 @@
+<form ng-submit="saveInfo()" ng-if="ui.modal_info">
+<div class="editor_modal_box">
+
+  <header>
+    <h1 class="script-info">Script Info</h1>
+  </header>
+  <section>
+    <div class="bigform">
+          <p>
+            <label class="label-field">Name:</label>
+            <input ng-model="command.command" type="text" required />
+          </p>
+          <p>
+            <label class="label-field">Description:</label>
+            <input ng-model="command.description" type="text" required />
+          </p>
+
+          <label class="label-field">Add Tags:</label>
+          <div class="addon">
+            <input type="text" ng-class="{invalid: tag_input_invalid == true}" ng-model="ui.tag" ng-pattern="words_only" placeholder="New Tag" />
+            <button ng-click="addTag($event)" class="new-primary">Add</button>
+          </div>
+          <div ng-if="command.tags && command.tags.length" class="tags">
+              <span ng-repeat="t in command.tags" class="tag">
+                <!-- <i class="fa fa-tag" aria-hidden="true"></i>  -->
+                {% t %}
+                <button class="delete" ng-click="removeTag($index)"></button>
+              </span>
+          </div>
+
+          <br/>
+        <label class="label-field">Script Id: <a href="https://botkit.ai/docs/readme-studio.html#controllerstudiogetbyid" target="_blank">How do I use this?</a></label>
+          <div class="addon">
+            <input type="text smaller" id="script_id" readonly ng-model="command.id" />
+            <button class="new-primary" type="button" ngclipboard data-clipboard-target="#script_id"><i class="fa fa fa-clipboard"></i></button>
+          </div>
+    </div>
+  </section>
+
+
+  <footer>
+    <button class="done-button" type="submit primary">Done</button>
+  </footer>
+</div>
+</form>
+
+<style>
+  .script-info {
+    font-size: 26px;
+    color: #FCBF10;
+    letter-spacing: 0;
+  }
+
+  .label-field {
+    font-size: 14px;
+    color: #fff;
+    margin-bottom: 4px;
+  }
+  .new-primary {
+    background: #497AD2;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 14px;
+    height: 28px;
+    position: relative;
+    top: 10px;
+  }
+  .done-button {
+    background: #FCBF10;
+    border-radius: 16.5px;
+    height: 33px;
+    width: 85px;
+    font-size: 14px;
+    color: #101A2C;
+    margin: 10px 0 10px;
+  }
+
+  .done-button:hover {
+    color: #101A2C;
+  }
+</style>

@@ -1,0 +1,67 @@
+<form ng-submit="renameThread(thread,ui.rename_thread)">
+
+<div class="editor_modal_box" ng-if="ui.editbranch">
+
+  <header ng-if="!ui.newbranch">
+    <h1>Modify Thread</h1>
+  </header>
+  <header ng-if="ui.newbranch">
+    <h1 class="script-info">Add Thread</h1>
+  </header>
+  <section>
+    <div class="bigform">
+          <p>
+            <label class="label-field">Thread Name:</label>
+            <input ng-model="ui.rename_thread" type="text" required />
+          </p>
+    </div>
+  </section>
+  <footer>
+    <button type="submit" class="done-button">Save</button>
+    <button type="button" class="cancel-button" ng-click="ui.editbranch=false; ui.newbranch=false;">Cancel</button>
+
+  </footer>
+</div>
+</form>
+
+<style>
+  .script-info {
+    font-size: 26px;
+    color: #FCBF10;
+    letter-spacing: 0;
+  }
+
+  .label-field {
+    font-size: 14px;
+    color: #fff;
+    margin-bottom: 4px;
+  }
+
+  .done-button {
+    background: #FCBF10;
+    border-radius: 16.5px;
+    height: 33px;
+    width: 85px;
+    font-size: 14px;
+    color: #101A2C;
+    margin: 10px 0 10px;
+  }
+
+  .done-button:hover {
+    color: #101A2C;
+  }
+
+  .cancel-button {
+    background: #497AD2;
+    border-radius: 16.5px;
+    height: 33px;
+    width: 85px;
+    font-size: 14px;
+    color: #101A2C;
+    margin: 10px 0 10px;
+  }
+
+  .cancel-button:hover {
+    color: #101A2C;
+  }
+</style>
